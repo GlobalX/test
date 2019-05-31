@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4D76505-EB02-40F2-B200-76254E21D3B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GSF.Provider.Landata.UnitTests</RootNamespace>
+    <AssemblyName>GSF.Provider.Landata.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
+      <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ConfigInjector, Version=2.3.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ConfigInjector.2.3.19\lib\net45\ConfigInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="CsQuery, Version=1.3.3.249, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="GlobalX.CDM.Common, Version=2.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GlobalX.CDM.Common.2.0.0.4\lib\net46\GlobalX.CDM.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Common.Exceptions, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Common.Exceptions.3.0.0\lib\netstandard2.0\GSF.Common.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Common.NPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Common.NPI.4.0.4\lib\netstandard2.0\GSF.Common.NPI.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.Billing, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.Billing.5.0.0\lib\netstandard1.3\GSF.Messages.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.Common.6.0.1\lib\netstandard1.0\GSF.Messages.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.Common.Provider, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.Common.Provider.6.0.3\lib\netstandard1.3\GSF.Messages.Common.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.Landata, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.Landata.4.0.0\lib\netstandard1.3\GSF.Messages.Landata.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.Order, Version=6.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.Order.6.0.2\lib\netstandard1.3\GSF.Messages.Order.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.PDF, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.PDF.4.0.1\lib\netstandard1.6\GSF.Messages.PDF.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Messages.Storage, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Messages.Storage.6.0.3\lib\netstandard1.3\GSF.Messages.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Nimbus.RabbitMQ, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Nimbus.RabbitMQ.6.0.3\lib\net46\GSF.Nimbus.RabbitMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Nimbus.RabbitMQ.MessagingInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Nimbus.RabbitMQ.MessagingInterfaces.2.0.0\lib\netstandard1.0\GSF.Nimbus.RabbitMQ.MessagingInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="GSF.Provider.Landata.Proxy, Version=6.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\GSF.Provider.Landata.Proxy.6.0.1\lib\netstandard2.0\GSF.Provider.Landata.Proxy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GSF.Users.Endpoint.Client, Version=1.2.0.96, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GSF.Users.Endpoint.Client.1.2.0.96\lib\net45\GSF.Users.Endpoint.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Nancy, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.1.4.5\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Testing, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Testing.1.4.1\lib\net40\Nancy.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=4.2.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca">
+      <HintPath>..\packages\NSubstitute.4.2.0\lib\net46\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
+      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shouldly, Version=3.0.2.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941">
+      <HintPath>..\packages\Shouldly.3.0.2\lib\net451\Shouldly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.NameResolution, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.NameResolution.4.3.0\lib\net46\System.Net.NameResolution.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.5.0\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Duplex, Version=4.1.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.Duplex.4.4.4\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.ServiceModel.Http.4.5.3\lib\net461\System.ServiceModel.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp, Version=4.1.2.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.NetTcp.4.4.4\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives, Version=4.5.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.Primitives.4.5.3\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.0\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TestStack.BDDfy, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.BDDfy.4.3.2\lib\net40\TestStack.BDDfy.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="Exceptions\Handlers\ValidationExceptionHandlerTest.Setup.cs" />
+    <Compile Include="Exceptions\Handlers\ValidationExceptionHandlerTests.cs" />
+    <Compile Include="Handlers\BaseTestHandler.cs" />
+    <Compile Include="Handlers\CreateErrorDocOnItemFailedTests.cs" />
+    <Compile Include="Handlers\CreateErrorDocOnItemFailedTests.Setup.cs">
+      <DependentUpon>CreateErrorDocOnItemFailedTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\CreatePendingDocumentOnItemOrderedTests.cs" />
+    <Compile Include="Handlers\CreatePendingDocumentOnItemOrderedTests.Setup.cs">
+      <DependentUpon>CreatePendingDocumentOnItemOrderedTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\DispatchPackageItemsHandlerTests.cs" />
+    <Compile Include="Handlers\DispatchPackageItemsHandlerTests.Setup.cs">
+      <DependentUpon>DispatchPackageItemsHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\GetLargePackageItemCommandHandlerTests.cs" />
+    <Compile Include="Handlers\GetLargePackageItemCommandHandlerTests.Setup.cs">
+      <DependentUpon>GetLargePackageItemCommandHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\HistoricalTitleSearchImageHandlerTests.Setup.cs">
+      <DependentUpon>HistoricalTitleSearchImageHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\HistoricalTitleSearchImageHandlerTests.cs" />
+    <Compile Include="Handlers\CancelledTitleSearchImageHandlerTests.cs" />
+    <Compile Include="Handlers\CancelledTitleSearchImageHandlerTests.Setup.cs">
+      <DependentUpon>CancelledTitleSearchImageHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\GetPackageItemCommandHandlerTests.Setup.cs">
+      <DependentUpon>GetPackageItemCommandHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\GetPackageItemCommandHandlerTests.cs" />
+    <Compile Include="Handlers\OwnerCorpReportPremiumHandlerTests.Setup.cs">
+      <DependentUpon>OwnerCorpReportPremiumHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\OwnerCorpReportPremiumHandlerTests.cs" />
+    <Compile Include="Handlers\PdfProcessedHandlerTests.cs" />
+    <Compile Include="Handlers\PdfProcessedHandlerTests.Setup.cs">
+      <DependentUpon>PdfProcessedHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\GetImageDataCommandHandlerTests.cs" />
+    <Compile Include="Handlers\GetImageDataCommandHandlerTests.Setup.cs">
+      <DependentUpon>GetImageDataCommandHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\GetImageCommandHandlerTests.cs" />
+    <Compile Include="Handlers\GetImageCommandHandlerTests.Setup.cs">
+      <DependentUpon>GetImageCommandHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\DealingImageHandlerTests.cs" />
+    <Compile Include="Handlers\DealingImageHandlerTests.Setup.cs">
+      <DependentUpon>DealingImageHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\PrelodgementSearchModuleTest.cs" />
+    <Compile Include="NancyModules\PrelodgementSearchModuleTest.Setup.cs">
+      <DependentUpon>PrelodgementSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\IssueSearchModuleTest.Setup.cs">
+      <DependentUpon>IssueSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\IssueSearchModuleTest.cs" />
+    <Compile Include="NancyModules\TitlesAffectedByDealingSearchModuleTest.Setup.cs">
+      <DependentUpon>TitlesAffectedByDealingSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\TitlesAffectedByDealingSearchModuleTest.cs" />
+    <Compile Include="NancyModules\DealingActivityOnTitleSearchModuleTest.cs" />
+    <Compile Include="NancyModules\DealingActivityOnTitleModuleSearchTest.Setup.cs">
+      <DependentUpon>DealingActivityOnTitleSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\FinalSearchModuleTest.cs" />
+    <Compile Include="NancyModules\FinalSearchModuleTest.Setup.cs">
+      <DependentUpon>FinalSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\TitleSearchModuleTest.cs" />
+    <Compile Include="NancyModules\TitleSearchModuleTest.Setup.cs">
+      <DependentUpon>TitleSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Strategies\PackageDocumentStrategyTestsBase.cs" />
+    <Compile Include="Strategies\PackagePlanDocumentStrategyTests.cs" />
+    <Compile Include="Strategies\PackageRegisterSearchStatementDocumentStrategyTests.cs" />
+    <Compile Include="Utilities\ProviderItemOrderedEventExtensions.cs" />
+    <Compile Include="Managers\ErrorDocumentManagerTests.cs" />
+    <Compile Include="Managers\ErrorDocumentManagerTests.Setup.cs">
+      <DependentUpon>ErrorDocumentManagerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\CompanyModuleBaseTest.cs" />
+    <Compile Include="NancyModules\IndividualSearchModuleTest.Setup.cs">
+      <DependentUpon>IndividualSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\IndividualSearchModuleTest.cs" />
+    <Compile Include="NancyModules\GetPackageModuleTest.Setup.cs">
+      <DependentUpon>GetPackageModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\GetPackageModuleTest.cs" />
+    <Compile Include="NancyModules\PackageModuleTestBase.cs" />
+    <Compile Include="NancyModules\TitleVerifySearchModule.cs" />
+    <Compile Include="NancyModules\TitleVerifySearchModule.Setup.cs">
+      <DependentUpon>TitleVerifySearchModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\UpdatePackageModuleTests.cs" />
+    <Compile Include="NancyModules\UpdatePackageModuleTests.Setup.cs">
+      <DependentUpon>UpdatePackageModuleTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\CreatePackageModuleTest.cs" />
+    <Compile Include="NancyModules\CreatePackageModuleTest.Setup.cs">
+      <DependentUpon>CreatePackageModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\SpiSearchModuleTest.cs" />
+    <Compile Include="NancyModules\SpiSearchModuleTest.Setup.cs">
+      <DependentUpon>SpiSearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\PlanImageHandlerTests.cs" />
+    <Compile Include="Handlers\PlanImageHandlerTests.Setup.cs">
+      <DependentUpon>PlanImageHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\CompanySearchModuleTest.Setup.cs">
+      <DependentUpon>CompanySearchModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NancyModules\CompanySearchModuleTest.cs" />
+    <Compile Include="NancyModules\ModuleTestBase.cs" />
+    <Compile Include="Parsers\TimeSpanArrayParserTests.cs" />
+    <Compile Include="Parsers\StringArrayParserTests.cs" />
+    <Compile Include="Polling\CertificatePollingTests.cs" />
+    <Compile Include="Utilities\PackageServiceProxyTests.cs" />
+    <Compile Include="Utilities\PackageServiceProxyTests.Setup.cs" />
+    <Compile Include="Utilities\BillerTests.Setup.cs" />
+    <Compile Include="Utilities\BillerTests.cs" />
+    <Compile Include="Exceptions\ErrorStatusCodeHandlerTests.cs" />
+    <Compile Include="Exceptions\ErrorStatusCodeHandlerTests.Setup.cs">
+      <DependentUpon>ErrorStatusCodeHandlerTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formatters\AddressStringFormatterTests.cs" />
+    <Compile Include="Formatters\CorporationReportCriteriaFormatterTests.cs" />
+    <Compile Include="Formatters\CorporationReportCriteriaFormatterTests.Setup.cs">
+      <DependentUpon>CorporationReportCriteriaFormatterTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formatters\CouncilNumberSearchResponseFormatterTests.cs" />
+    <Compile Include="Formatters\DataStatusFormatterTests.cs" />
+    <Compile Include="Formatters\AddressStringFormatterTests.Setup.cs">
+      <DependentUpon>AddressStringFormatterTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formatters\CouncilNumberSearchResponseFormatterTest.Setup.cs">
+      <DependentUpon>CouncilNumberSearchResponseFormatterTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formatters\VolumeFolioStatusFormatterTest.Setup.cs">
+      <DependentUpon>VolumeFolioStatusFormatterTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formatters\VolumeFolioStatusFormatterTest.cs" />
+    <Compile Include="Mappers\ApplicationIndexSearchRequestMapperTest.cs" />
+    <Compile Include="Mappers\ApplicationIndexSearchRequestMapperTest.Setup.cs">
+      <DependentUpon>ApplicationIndexSearchRequestMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\PropertyIdentifierBuildMultipleResponseMapperTest.Setup.cs">
+      <DependentUpon>PropertyIdentifierBuildMultipleResponseMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\PropertyIdentifierBuildMultipleResponseMapperTest.cs" />
+    <Compile Include="Mappers\TitleSearchResponseMapperTests.Setup.cs">
+      <DependentUpon>TitleSearchResponseMapperTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\TitleSearchResponseMapperTests.cs" />
+    <Compile Include="Mappers\AddressSearchResponseMapperTests.Setup.cs">
+      <DependentUpon>AddressSearchResponseMapperTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\AddressSearchResponseMapperTests.cs" />
+    <Compile Include="Mappers\DatumBrowseSearchResponseMapperTest.cs" />
+    <Compile Include="Mappers\DatumBrowseSearchResponseMapperTest.Setup.cs">
+      <DependentUpon>DatumBrowseSearchResponseMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\LotPlanBrowseSearchRequestMapperTests.Setup.cs">
+      <DependentUpon>LotPlanBrowseSearchRequestMapperTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\LotPlanBrowseSearchRequestMapperTests.cs" />
+    <Compile Include="Mappers\CouncilNumberBrowseSearchRequestMapperTest.Setup.cs">
+      <DependentUpon>CouncilNumberBrowseSearchRequestMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\CouncilNumberBrowseSearchRequestMapperTest.cs" />
+    <Compile Include="Mappers\AddressBrowseSearchRequestMapperTests.Setup.cs">
+      <DependentUpon>AddressBrowseSearchRequestMapperTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\AddressBrowseSearchRequestMapperTests.cs" />
+    <Compile Include="Mappers\CreatePackageRequestMapperTests.cs" />
+    <Compile Include="Mappers\CreatePackageRequestMapperTests.Setup.cs">
+      <DependentUpon>CreatePackageRequestMapperTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\CrownDescriptionResponseMapperTest.Setup.cs" />
+    <Compile Include="Mappers\CrownDescriptionResponseMapperTest.cs" />
+    <Compile Include="Mappers\IndividualBrowseSearchRequestMapperTest.Setup.cs">
+      <DependentUpon>IndividualBrowseSearchRequestMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\IndividualBrowseSearchRequestMapperTest.cs" />
+    <Compile Include="Mappers\CompanyBrowseSearchRequestMapperTest.Setup.cs">
+      <DependentUpon>CompanyBrowseSearchRequestMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\CompanyVerifyRequestMapperTest.Setup.cs">
+      <DependentUpon>CompanyVerifyRequestMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\CompanyVerifyRequestMapperTest.cs" />
+    <Compile Include="Mappers\CompanyBrowseSearchRequestMapperTest.cs" />
+    <Compile Include="Mappers\CompanyBrowseSearchResponseMapperTest.cs" />
+    <Compile Include="Mappers\CompanyBrowseSearchResponseMapperTest.Setup.cs">
+      <DependentUpon>CompanyBrowseSearchResponseMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\SpiBrowseSearchRequestMapperTest.Setup.cs">
+      <DependentUpon>SpiBrowseSearchRequestMapperTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mappers\SpiBrowseSearchRequestMapperTest.cs" />
+    <Compile Include="Polling\ImagePollingServiceTests.cs" />
+    <Compile Include="Polling\PackagePollingServiceTests.cs" />
+    <Compile Include="Polling\PackagePollingServiceTests.Setup.cs">
+      <DependentUpon>PackagePollingServiceTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchRequestMapperTestHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GSF.Provider.Landata.Endpoint\GSF.Provider.Landata.Endpoint.csproj">
+      <Project>{7a920128-be63-4861-9c64-fadcfa6d8956}</Project>
+      <Name>GSF.Provider.Landata.Endpoint</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documents\ValidTitleSearchDocument.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
