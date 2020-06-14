@@ -1,0 +1,200 @@
+apiVersion: v1
+kind: List
+items:
+# Define the Namespace so it is created if it doesnt exist
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: gsf-provider-candb-asic
+# Define the Service (the way the containers are accessed)
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: gsf-provider-candb-asic-service
+      namespace: gsf-provider-candb-asic
+      labels:
+        name: gsf-provider-candb-asic-service
+    spec:
+      ports:
+        - port: 8194
+          targetPort: 8194
+      selector:
+        app: gsf-provider-candb-asic
+  - apiVersion: policy/v1beta1
+    kind: PodDisruptionBudget
+    metadata:
+      name: gsf-provider-candb-asic-disruption
+      namespace: gsf-provider-candb-asic
+    spec:
+      minAvailable: 1
+      selector:
+        matchLabels:
+          app: gsf-provider-candb-asic
+  # Define the Deployment (this creates the pod(s)) and exposes the ports, it also defines how many replicas will be running
+  - apiVersion: apps/v1beta1
+    kind: Deployment
+    metadata:
+      name: gsf-provider-candb-asic-deployment
+      namespace: gsf-provider-candb-asic
+    spec:
+      replicas: 2
+      template:
+        metadata:
+          name: gsf-provider-candb-asic
+          labels:
+            app: gsf-provider-candb-asic
+        spec:
+          imagePullSecrets:
+            - name: globalx-awsecr-login
+          containers:
+          - name: gsf-provider-candb-asic
+            imagePullPolicy: "IfNotPresent"
+            image: 061477051943.dkr.ecr.ap-southeast-2.amazonaws.com/globalx/gsf-provider-candb-asic:<<version_placeholder>> #This is replaced by the team city job based on build parameters
+            resources:
+              limits:
+                memory: 300Mi
+              requests:
+                memory: 200Mi
+            ports:
+              - name: candb-asic
+                containerPort: 8194
+            livenessProbe:
+              httpGet:
+                path: /status
+                port: 8194
+              initialDelaySeconds: 30
+              timeoutSeconds: 30
+            env:
+              - name: AsicHost
+                valueFrom:
+                  configMapKeyRef:
+                    name: asic-settings
+                    key: asic-host
+              - name: AsicPort
+                valueFrom:
+                  configMapKeyRef:
+                    name: asic-settings
+                    key: asic-port
+              - name: AsicUsername
+                valueFrom:
+                  configMapKeyRef:
+                    name: asic-settings
+                    key: asic-username
+              - name: AsicSampleClientUserIds
+                valueFrom:
+                  configMapKeyRef:
+                    name: asic-settings
+                    key: asic-sampleclient-userids
+              - name: ConcessionalUserDetails
+                valueFrom:
+                  configMapKeyRef:
+                    name: asic-settings
+                    key: concessional-user-details
+              - name: PasswordResetUrl
+                valueFrom:
+                  configMapKeyRef:
+                    name: asic-settings
+                    key: password-reset-url
+              - name: DocImagesReturnEmailAddress
+                valueFrom:
+                  configMapKeyRef:
+                    name: doc-images
+                    key: doc-images-return-email-address
+              - name: RabbitHostName
+                valueFrom:
+                  configMapKeyRef:
+                    name: rabbit-login
+                    key: rabbit-hostname
+              - name: RabbitPort
+                valueFrom:
+                  configMapKeyRef:
+                    name: rabbit-login
+                    key: rabbit-port
+              - name: RabbitUsername
+                valueFrom:
+                  configMapKeyRef:
+                    name: rabbit-login
+                    key: rabbit-username
+              - name: RabbitPassword
+                valueFrom:
+                  configMapKeyRef:
+                    name: rabbit-login
+                    key: rabbit-password
+              - name: EmailUrl
+                valueFrom:
+                  configMapKeyRef:
+                    name: email-settings
+                    key: email-url
+              - name: NewConcessionalUsersEmailAddress
+                valueFrom:
+                  configMapKeyRef:
+                    name: email-settings
+                    key: new-concessional-users-emailAddress
+              - name: HelpDeskEmailAddress
+                valueFrom:
+                  configMapKeyRef:
+                    name: email-settings
+                    key: helpdesk-emailAddress
+              - name: ConcessionalUsersDatabaseConnectionString
+                valueFrom:
+                  configMapKeyRef:
+                    name: database-settings
+                    key: concessional-users-database-connectionString
+              - name: BucketName
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: bucket-name
+              - name: ProjectId
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: project-id
+              - name: PrivateKeyId
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: private-key-id
+              - name: PrivateKey
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: private-key
+              - name: ClientEmail
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: client-email
+              - name: ClientId
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: client-id
+              - name: ClientX509CertUrl
+                valueFrom:
+                  configMapKeyRef:
+                    name: gcp-settings
+                    key: client-x509-cert-url
+# Define the ingress controller (bind a route to the service, in this case /candb-asic will hit gsf-provider-candb-asic service on port 8194)
+  - apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: gsf-provider-candb-asic-ingress
+      namespace: gsf-provider-candb-asic
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+        nginx.ingress.kubernetes.io/rewrite-target: /
+        ingress.kubernetes.io/rewrite-target: /
+    spec:
+      tls:
+      - hosts:
+        - <<environment_placeholder>>
+        secretName: wildcard-tls
+      rules:
+      - host: <<environment_placeholder>> #This is replaced by the team city job based on build parameters
+        http:
+          paths:
+          - path: /api/candb-asic
+            backend:
+              serviceName: gsf-provider-candb-asic-service
+              servicePort: 8194
